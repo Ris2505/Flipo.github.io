@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="firststyle.css">
+</head>
+<body>
+    
+      <div class="area" >
+            <ul class="circles">
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+            </ul>
+      </div >
+      
+      <div class="card" style="height: 30rem; width: 27rem;">
+            <div class="container">
+                  <div id="countdown" class="countd"></div>
+                  <div id="popu" class="pop"></div>
+                  <div id="wrong" class="wrongA">
+                    <p>Wrong!</p>
+                  </div>
+                  <div id="correct" class="correctA"><p>CORRECT!</p>
+                    
+                </div>
+                <button id="nextlevel" onclick="yourlev()">Next level</button>
+                  <div id="start" >
+                        <button class="button1"onclick="showDiv();words();hideDiv2();hideDiv1();timer();popup();opShow();option();question();call2()">START</button>
+                  </div>
+                  <div id="ques" class="ques"></div>
+                  <div class="words">
+                        
+                        <div >
+                              <p id="word1" class="wordDisplay1"></p>
+                        </div>
+                        <div >
+                              <p id="word2" class="wordDisplay2"></p>
+                        </div>
+                        <div >
+                              <p id="word3" class="wordDisplay3"></p>
+                        </div>
+                        <div >
+                              <p id="word4" class="wordDisplay4"></p>
+                        </div>
+                        <div>
+                              <p id="word5" class="wordDisplay5"></p>
+                        </div>
+                  </div>
+                  <div id="ques2" class="ques"></div>
+                  <div id="timeup">
+                    <p id="timeuptext">Time's up!</p>
+                    <button id="timeuptryagain" onclick="location.reload()">RETRY</button>
+                  </div>
+                  <div class="options">
+                        
+                        <div >
+                              <button onclick="pressa()" id="op1" class="wordoption1"></button>
+                        </div>
+                        <div >
+                              <button onclick="pressb()" id="op2" class="wordoption1"></button>
+                        </div>
+                        <div >
+                              <button onclick="pressc()" id="op3" class="wordoption1"></button>
+                        </div>
+                        <div >
+                              <button onclick="pressd()" id="op4" class="wordoption1"></button>
+                        </div>
+                        <div >
+                              <button onclick="presse()" id="op5" class="wordoption1"></button>
+                        </div>
+                  </div>
+                   <div id="back" class="GoBack">
+                              <button id= "back2" onclick="location.href='../home.html'">BACK TO HOME</button>
+                  </div>
+                  <div id="retry" class="retry1">
+                        <button id= "retry2" onclick="location.reload()">RETRY</button>
+                  </div>
+            </div>
+      </div>
+      
+
+
+
+
+    
+
+
+
+
+    <script>
+        var level=1;
+        var numbers = [];
+        var min = 1;
+        var max = 5;
+        var r = 5; // how many numbers you want to extract
+
+        for (let i = 0; i < r; i++) {
+        do {
+            n = Math.floor(Math.random() * (max - min + 1)) + min;
+            p = numbers.includes(n);
+            if(!p){
+            numbers.push(n);
+            }
+        }
+        while(p);
+}
+        var a=numbers[0];
+        var b=numbers[1];
+        var c=numbers[2];
+        var d=numbers[3];
+        var e=numbers[4];
+        
+ 
+         var word1=["abyss","prior","banjo","usual","adapt","turbo","young","beach","vague","walls","amend","radio","candy","years"];
+        var word2=["wrote","yummy","vegan","creek","feast","eight","dawns","fired","crock","ebook","falls","guilt"];
+        var word3=["happy","bloom","judge","clock","fancy","harsh","fairy","piano","empty","humor","blank","camel","poker","daisy"];
+        var word4=["elbow","human","money","linen","drift","jumps","knock","earth","index","elder","paper","dance","biker","pasta"];
+        var word5=["mercy","lemon","canal","jewel","level","metro","knife","child","dizzy","ideal","bingo","dough","motor","dying"];
+        var i=Math.floor(Math.random() * (14) ) ;
+        var j=0;
+
+            document.getElementById("word1").style.visibility="hidden";
+            document.getElementById("word2").style.visibility="hidden";
+            document.getElementById("word3").style.visibility="hidden";
+            document.getElementById("word4").style.visibility="hidden";
+            document.getElementById("word5").style.visibility="hidden";
+            document.getElementById("countdown").style.visibility="hidden";
+            document.getElementById("popu").style.visibility="hidden";
+            document.getElementById("op1").style.visibility="hidden";
+            document.getElementById("op2").style.visibility="hidden";
+            document.getElementById("op3").style.visibility="hidden";
+            document.getElementById("op4").style.visibility="hidden";
+            document.getElementById("op5").style.visibility="hidden";
+            document.getElementById("ques").style.visibility="hidden";
+            document.getElementById("ques2").style.visibility="hidden";
+            document.getElementById("retry2").style.visibility="hidden";
+            document.getElementById("back2").style.visibility="hidden";
+            document.getElementById("timeup").style.visibility="hidden";
+            document.getElementById("back").style.visibility="hidden";
+            document.getElementById("retry").style.visibility="hidden";
+            document.getElementById("wrong").style.visibility="hidden";
+            document.getElementById("correct").style.visibility="hidden";
+            document.getElementById("nextlevel").style.visibility="hidden";
+
+        var opt1="op"+a;
+        var opt2="op"+b;
+        var opt3="op"+c;
+        var opt4="op"+d;
+        var opt5="op"+e;
+        var arr=Array[6];
+       
+        function yourlev()
+        {   
+            if(level==2)
+            {
+                level2();
+            }
+            else if(level==3)
+            {
+                level3();
+
+            }
+            else if(level>3)
+            {
+                level=1;
+            }
+        }
+        function words(){
+        document.getElementById("word1").innerHTML=word1[i]+"<br>";
+        
+        document.getElementById("word2").innerHTML=word2[i]+"<br>";
+       
+        document.getElementById("word3").innerHTML=word3[i]+"<br>";
+        
+        document.getElementById("word4").innerHTML=word4[i]+"<br>";
+        
+        document.getElementById("word5").innerHTML=word5[i];
+        }
+        function popup()
+        {
+            document.getElementById("popu").style.visibility="visible";
+        }
+        function question()
+        {
+            document.getElementById("ques").style.visibility="visible";
+            document.getElementById("ques").innerHTML="Memorise the order of the words displayed below";
+        }
+        function question2()
+        {
+            document.getElementById("ques2").style.visibility="visible";
+            document.getElementById("ques2").innerHTML="Now select the options in the same order";
+            
+
+        }
+        function call2()
+        {
+            setTimeout("question2()",10010);
+        }
+        function hide2()
+        {
+            document.getElementById("ques2").style.visibility="hidden";
+
+        }
+        function ret()
+        {
+            
+            document.getElementById("retry2").style.visibility="visible";
+            document.getElementById("back2").style.visibility="visible";
+        }
+
+        function option()
+        {
+        document.getElementById(opt1).innerHTML=word1[i]+"<br>";
+        
+        document.getElementById(opt2).innerHTML=word2[i]+"<br>";
+       
+        document.getElementById(opt3).innerHTML=word3[i]+"<br>";
+        
+        document.getElementById(opt4).innerHTML=word4[i]+"<br>";
+        
+        document.getElementById(opt5).innerHTML=word5[i];
+        }
+  
+        function hideDiv()
+        {
+            document.getElementById("word1").style.visibility="hidden";
+            document.getElementById("word2").style.visibility="hidden";
+            document.getElementById("word3").style.visibility="hidden";
+            document.getElementById("word4").style.visibility="hidden";
+            document.getElementById("word5").style.visibility="hidden";
+            document.getElementById("countdown").style.visibility="hidden";
+            document.getElementById("ques").style.visibility="hidden";          
+        }
+            
+        function showDiv()
+        {
+            document.getElementById("word1").style.visibility="visible";
+            document.getElementById("word2").style.visibility="visible";
+            document.getElementById("word3").style.visibility="visible";
+            document.getElementById("word4").style.visibility="visible";
+            document.getElementById("word5").style.visibility="visible";
+            document.getElementById("countdown").style.visibility="visible";
+        }
+        function hideDiv1()
+        {
+            setTimeout("hideDiv()",10000);
+        }
+        function showOption()
+        {
+            document.getElementById("op1").style.visibility="visible";
+            document.getElementById("op2").style.visibility="visible";
+            document.getElementById("op3").style.visibility="visible";
+            document.getElementById("op4").style.visibility="visible";
+            document.getElementById("op5").style.visibility="visible";
+            document.getElementById("countdown").style.visibility="visible";
+            timer2();
+            
+
+
+        }
+        function timer2()
+        {
+            var seconds=10;
+        
+        var countdown = setInterval(function() {
+         seconds--;
+        document.getElementById("countdown").innerHTML = seconds;
+        if (seconds <= 0) 
+        {
+            clearInterval(countdown);
+            document.getElementById("op1").style.visibility="hidden";
+            document.getElementById("op2").style.visibility="hidden";
+            document.getElementById("op3").style.visibility="hidden";
+            document.getElementById("op4").style.visibility="hidden";
+            document.getElementById("op5").style.visibility="hidden";
+            document.getElementById("countdown").style.visibility="hidden";
+            document.getElementById("ques2").style.visibility="hidden";
+            document.getElementById("timeup").style.visibility="visible";
+           
+            document.getElementById("retry").style.visibility="hidden";
+            document.getElementById("back").style.visibility="hidden";
+
+        }
+        }, 1000);
+        document.getElementById("countdown").innerHTML=10+"<br>";
+        
+        
+      
+    }
+    let seconds=10;
+        function opShow()
+        {
+            setTimeout("showOption()",10000);
+        }
+    
+        function hideDiv2()
+        {
+            document.getElementById("start").style.visibility="hidden";
+        }
+        function timer()
+        {
+            
+        
+        var countdown = setInterval(function() {
+         seconds--;
+        document.getElementById("countdown").innerHTML = seconds;
+        if (seconds <= 0) clearInterval(countdown);
+        }, 1000);
+        document.getElementById("countdown").innerHTML=10+"<br>"
+      
+    }
+    
+                //checking position, if arr[2]=1 ie this is at second place so 2nd called if j==1 ie before it first called//
+                //word1 goes to ath word2 to bth.....//
+                //pressing option 1 see which of a b c d is 1 and if it is 1 then did//
+
+    function pressa()
+        {   var p=1;
+            if(a==1&&j==0)
+            {
+                j++;
+            }
+            else if(b==1&&j==1)
+            {
+                j++;
+            }
+            else if(c==1&&j==2)
+            {
+                j++;
+            }
+            else if(d==1&&j==3)
+            {
+                j++;
+            }
+            else if(e==1&&j==4)
+            {
+                
+                correct();
+                hide2();
+                ret();
+            }
+            else{
+                wrong();
+                hide2();
+                ret();
+            }
+        }
+        function pressb()
+        {   var q=2;
+            if(a==2&&j==0)
+            {
+                j++;
+            }
+            else if(b==2&&j==1)
+            {
+                j++;
+            }
+            else if(c==2&&j==2)
+            {
+                j++;
+            }
+            else if(d==2&&j==3)
+            {
+                j++;
+            }
+            else if(e==2&&j==4)
+            {
+                
+                correct();
+                hide2();
+                ret();
+            }
+            else{
+                wrong();
+                hide2();
+                ret();
+            }
+        }
+        function pressc()
+        {   var r=3;
+            if(a==r&&j==0)
+            {
+                j++;
+            }
+            else if(b==r&&j==1)
+            {
+                j++;
+            }
+            else if(c==r&&j==2)
+            {
+                j++;
+            }
+            else if(d==r&&j==3)
+            {
+                j++;
+            }
+            else if(e==r&&j==4)
+            {
+                
+                correct();
+                hide2();
+                ret();
+            }
+            else{
+                wrong();
+                hide2();
+                ret();
+            }
+        }
+
+        function pressd()
+        {   var s=4;
+            if(a==s&&j==0)
+            {
+                j++;
+            }
+            else if(b==s&&j==1)
+            {
+                j++;
+            }
+            else if(c==s&&j==2)
+            {
+                j++;
+            }
+            else if(d==s&&j==3)
+            {
+                j++;
+            }
+            else if(e==s&&j==4)
+            {
+                
+                correct();
+                hide2();
+                ret();
+            }
+            else{
+                wrong();
+                hide2();
+                ret();
+            }
+        }
+        function presse()
+        { var t=5;
+            if(a==t&&j==0)
+            {
+                j++;
+            }
+            else if(b==t&&j==1)
+            {
+                j++;
+            }
+            else if(c==t&&j==2)
+            {
+                j++;
+            }
+            else if(d==t&&j==3)
+            {
+                j++;
+            }
+            else if(e==t&&j==4)
+            {
+                
+                correct();
+                hide2();
+                ret();
+            }
+            else{
+                wrong();
+                hide2();
+                ret();
+            }
+        }
+        function wrong()
+        {
+            document.getElementById("wrong").style.visibility="visible";
+            document.getElementById("op1").style.visibility="hidden";
+            document.getElementById("op2").style.visibility="hidden";
+            document.getElementById("op3").style.visibility="hidden";
+            document.getElementById("op4").style.visibility="hidden";
+            document.getElementById("op5").style.visibility="hidden";
+            document.getElementById("countdown").style.visibility="hidden";
+            document.getElementById("timeuptext").style.visibility="hidden"
+        }
+        function correct()
+        {
+            document.getElementById("correct").style.visibility="visible";
+            
+            document.getElementById("timeup").style.visibility="hidden";
+            document.getElementById("op1").style.visibility="hidden";
+            document.getElementById("op2").style.visibility="hidden";
+            document.getElementById("op3").style.visibility="hidden";
+            document.getElementById("op4").style.visibility="hidden";
+            document.getElementById("op5").style.visibility="hidden";
+            document.getElementById("timeuptext").style.visibility="hidden";
+            document.getElementById("countdown").style.visibility="hidden";
+            document.getElementById("nextlevel").style.visibility="visible";
+            level=level+1;
+            seconds=6;
+            
+        }
+        
+        function level2()
+        {   
+            location.reload(true);
+        }
+    </script>
+</body>
+</html>
